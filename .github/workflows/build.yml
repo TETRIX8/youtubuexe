@@ -1,13 +1,13 @@
-name: Build EXE
+name: Build Video Downloader EXE
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: windows-latest
+    name: Build .exe on Windows
 
     steps:
       - name: Checkout code
@@ -23,11 +23,8 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install pyinstaller
-          # Добавь свои зависимости здесь, например:
           pip install pytube
-          pip install tkinter  # если нужен GUI
-          # Если у тебя есть requirements.txt:
-          # pip install -r requirements.txt
+          # tkinter НЕ НАДО устанавливать — он уже есть в Python
 
       - name: Build EXE
         run: |
@@ -36,5 +33,5 @@ jobs:
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
-          name: video-downloader-exe
+          name: video-downloader-windows
           path: dist/
